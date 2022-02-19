@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-a_dir = './OkieBTS-HashCode2022/input_2021_qualification/a.txt'
+a_dir = './2021-hashcode-practice/input/a.txt'
 
 class street:
   def __init__(self, s, e, l):
