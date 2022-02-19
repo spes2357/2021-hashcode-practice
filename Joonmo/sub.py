@@ -1,6 +1,7 @@
 from collections import defaultdict
 
-a_dir = './OkieBTS-HashCode2022/input_2021_qualification/a.txt'
+# a_dir = './2021-hashcode-practice/input/a.txt'
+a_dir = 'input/a.txt'
 
 class street:
   def __init__(self, s, e, l):
@@ -15,6 +16,10 @@ class car:
 
 streetDict = defaultdict()
 carDict = defaultdict()
+greenLightInfo = defaultdict(list)
+waitingQ = defaultdict(list)
+
+D, I, S, V, F = (None, None, None, None, None)
 
 def readInput():
   with open(a_dir) as f:
@@ -42,13 +47,47 @@ def readInput():
       # v lines: describe the paths of each cars
       for vindex in range(V):
         carDict[vindex] = car(lines[S+vindex+1].split()[1:], None)
-      
+        
       print("Cars")
       for cc in carDict.keys():
+        waitingQ[carDict[cc].streetList[0]].append(cc)
         print(cc, carDict[cc].streetList, carDict[cc].timeLeftCurrentStreet)
       print("\n")
       # car1 (0, [0, 1, 4, 3]), 4 rue-de-londres => rue-d-amsterdam => rue-de-moscou => rue-de-rome
       # car2 (1, [2, 4, 0]),    3 rue-d-athenes => rue-de-moscou => rue-de-londres
+
+def simNative():
+    listOfCars = list(range(V))
+    
+    
+    for T in range(D):
+        streetMentioned = set()
+        frontLineCars = list()
+        for street, cars in waitingQ.items():
+            streetName = street
+            if streetName not in streetMentioned:
+                streetMentioned.add(streetName)
+                frontLineCars.append(cars[0])
+                
+            else:
+                pass
+            
+        # find intersection and street
+        intersections = set()
+        for car in frontLineCars:
+            if streetDict[carDict[car].streetList[0]].intersectionEnd not in intersections:
+                thisStreet = streetDict[carDict[car].streetList[0]]
+                thisIntersection = streetDict[thisStreet].intersectionEnd
+                intersections.add(thisIntersection)
+                # give green light this car
+                greenLightInfo[thisIntersection].append((thisStreet, T))
+                
+                # update this car crossed
+                waitingQ[thisStreet].remove(car)
+                carDict[car].streetList
+                
+                
+            
 
 
 
@@ -56,5 +95,3 @@ def readInput():
 
 if __name__=="__main__":
     readInput()
-    
-    
