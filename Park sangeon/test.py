@@ -52,13 +52,16 @@ if __name__=="__main__":
 
 
 
-expected_output = 
+expected_output = 'D:\Hashcode team\2021-hashcode-practice\Park sangeon\output.txt'
 # expected_output = ['3',"WebServer","Bob Anna","Logging","Anna","WebChat","Maria"]
 
-for expected_output = 'D:\Hashcode team\2021-hashcode-practice\Park sangeon\output.txt'
+with open(expected_output) as fp:
+    lines = fp.readlines()
+    print(lines)
+# for expected_output 
 
-complete_flag = True
-day = 0
-while(complete_flag):
-    day +=1
+# complete_flag = True
+# day = 0
+# while(complete_flag):
+#     day +=1
     
