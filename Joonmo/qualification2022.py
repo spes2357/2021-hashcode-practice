@@ -2,7 +2,11 @@ from collections import defaultdict
 from doctest import OutputChecker
 
 # a_dir = '../2021-hashcode-practice/input/a_an_example.in.txt'
-a_dir = '../2021-hashcode-practice/input/b_better_start_small.in.txt'
+# a_dir = '../2021-hashcode-practice/input/b_better_start_small.in.txt'
+# a_dir = '../2021-hashcode-practice/input/c_collaboration.in.txt'
+# a_dir = '../2021-hashcode-practice/input/d_dense_schedule.in.txt'
+# a_dir = '../2021-hashcode-practice/input/e_exceptional_skills.in.txt'
+a_dir = '../2021-hashcode-practice/input/f_find_great_mentors.in.txt'
 
 class project:
   def __init__(self, d, s, b, r):
@@ -27,8 +31,8 @@ def readInput():
       # P: projects
 	  
       C, P = list(int(t) for t in lines[0].split())
-      print("C, P")
-      print(C, P)
+      # print("C, P")
+      # print(C, P)
       # c lines: descriptions of contributors
       x = 1
       for cindex in range(1, C+1):
@@ -40,7 +44,7 @@ def readInput():
           cTup = lines[x].split()
           contributorDict[name].append((cTup[0], cTup[1]))
           x += 1
-      print(contributorDict)
+      # print(contributorDict)
       
       # p lines: describe projects
       for pindex in range(P):
@@ -53,7 +57,7 @@ def readInput():
           x += 1
         # temp[0] is project name
         projectDict[temp[0]] = project(temp[1], temp[2], temp[3], tempList)
-        print(temp[0], projectDict[temp[0]].duration, projectDict[temp[0]].score, projectDict[temp[0]].bestbefore, projectDict[temp[0]].roles)
+        # print(temp[0], projectDict[temp[0]].duration, projectDict[temp[0]].score, projectDict[temp[0]].bestbefore, projectDict[temp[0]].roles)
 
 
 def simulationNative():
@@ -72,9 +76,9 @@ def simulationNative():
     # if contributor's skillset is in project role
     # ex) Bob': [('HTML', '5'), ('CSS', '5')]
     demandRoles = list(projectDict[P].roles)
-    print("\n\n")
-    print("Project", P)
-    print("this project demandRoles: ", demandRoles )
+    # print("\n\n")
+    # print("Project", P)
+    # print("this project demandRoles: ", demandRoles )
     # print("contributorsDict", contributorDict[C])
     demandRolesCounter = len(demandRoles)
     for demandSkillSet in demandRoles:
@@ -84,9 +88,9 @@ def simulationNative():
         # print("\n")
         for skillset in contributorDict[C]:
           if demandSkillSet[0] == skillset[0] and demandSkillSet[1] <= skillset[1]:
-            print("HEre")
-            print("skillset[C]", skillset)
-            print("demandSkillSet", demandSkillSet)
+            # print("HEre")
+            # print("skillset[C]", skillset)
+            # print("demandSkillSet", demandSkillSet)
             # demandRoles.remove(demandSkillSet)
             demandRolesCounter -= 1
             listOfWaitingContributors.remove(C)
@@ -116,12 +120,12 @@ def simulationNative():
         listOfWorkingContributors.remove(C)
       listOfWaitingContributors.append(C)
 
-  print("output: ")
-  print(outputDict.items())
+  # print("output: ")
+  # print(outputDict.items())
   writeOutput(outputDict)
 
 def writeOutput(outputDict):
-  file1 = open("submission.txt", "w")
+  file1 = open("f.txt", "w")
   file1.write(str(len(outputDict.keys())))
   file1.write("\n")
   for key, values in outputDict.items():
